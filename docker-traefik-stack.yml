@@ -20,6 +20,7 @@ services:
       - ./prometheus/:/etc/prometheus/
       - prometheus_data:/prometheus
     command:
+      - --port=9090
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
       - '--web.console.libraries=/usr/share/prometheus/console_libraries'
@@ -31,9 +32,11 @@ services:
         constraints:
           - node.role==manager
       labels:
-          - "traefik.frontend.rule=Host:prom.sportagainstwar.com"
-          - "traefik.backend=prometheus"
-          - "traefik.port=9090"
+          #- "traefik.frontend.rule=Host:prom.sportagainstwar.com"
+          #- "traefik.backend=prometheus"
+          #- "traefik.port=9090"
+          - "traefik.http.routers.prom_sportagainstwar_com.rule=Host(`prom.sportagainstwar.com`)"
+          - "traefik.http.services.prom_sportagainstwar_com.loadbalancer.server.port=9090"
 #          - "traefik.docker.network=dle-network"
       restart_policy:
         condition: on-failure
