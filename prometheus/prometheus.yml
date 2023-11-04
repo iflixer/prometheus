@@ -51,3 +51,14 @@ scrape_configs:
   
     static_configs:
       - targets: ['node-exporter:9100']
+
+  - job_name: 'traefik'
+
+    # Override the global default and scrape targets from this job every 5 seconds.
+    scrape_interval: 5s
+
+    dns_sd_configs:
+      - names:
+          - 'tasks.traefik'
+        type: 'A'
+        port: 8080
