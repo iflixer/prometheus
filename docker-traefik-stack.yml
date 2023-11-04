@@ -113,9 +113,12 @@ services:
           - node.role==manager
       labels:
         - "traefik.enable=true"
-        - "traefik.frontend.rule=Host:grafana.sportagainstwar.com"
-        - "traefik.backend=grafana"
-        - "traefik.port=3000"
+        - "traefik.http.routers.grafana_sportagainstwar_com.rule=Host(`grafana.sportagainstwar.com`)"
+        - "traefik.http.services.grafana_sportagainstwar_com.loadbalancer.server.port=3000"
+        - "traefik.docker.network=dle-network"
+        #- "traefik.frontend.rule=Host:grafana.sportagainstwar.com"
+        #- "traefik.backend=grafana"
+        #- "traefik.port=3000"
 #        - "traefik.docker.network=dle-network"
       restart_policy:
         condition: on-failure
