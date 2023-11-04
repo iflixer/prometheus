@@ -32,12 +32,13 @@ services:
           - node.role==manager
       labels:
           - "traefik.enable=true"
+          - "traefik.http.routers.prom_testme_cloud.rule=Host(`prom.testme.cloud`)"
+          - "traefik.http.services.prom_testme_cloud.loadbalancer.server.port=9090"
+          - "traefik.http.middlewares.prom_testme_cloud_auth.basicauth.users=admin:$$apr1$$C4Em0CWO$$5mfCP1W2vZnm98gEdWjwY/"
+          - "traefik.docker.network=dle-network"
           #- "traefik.frontend.rule=Host:prom.testme.cloud"
           #- "traefik.backend=prometheus"
           #- "traefik.port=9090"
-          - "traefik.http.routers.prom_testme_cloud.rule=Host(`prom.testme.cloud`)"
-          - "traefik.http.services.prom_testme_cloud.loadbalancer.server.port=9090"
-          - "traefik.docker.network=dle-network"
       restart_policy:
         condition: on-failure
 
@@ -115,6 +116,7 @@ services:
         - "traefik.enable=true"
         - "traefik.http.routers.grafana_testme_cloud.rule=Host(`grafana.testme.cloud`)"
         - "traefik.http.services.grafana_testme_cloud.loadbalancer.server.port=3000"
+        - "traefik.http.middlewares.grafana_testme_cloud_auth.basicauth.users=admin:$$apr1$$C4Em0CWO$$5mfCP1W2vZnm98gEdWjwY/"
         - "traefik.docker.network=dle-network"
         #- "traefik.frontend.rule=Host:grafana.testme.cloud"
         #- "traefik.backend=grafana"
