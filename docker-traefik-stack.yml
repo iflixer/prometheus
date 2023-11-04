@@ -32,11 +32,11 @@ services:
           - node.role==manager
       labels:
           - "traefik.enable=true"
-          #- "traefik.frontend.rule=Host:prom.sportagainstwar.com"
+          #- "traefik.frontend.rule=Host:prom.testme.cloud"
           #- "traefik.backend=prometheus"
           #- "traefik.port=9090"
-          - "traefik.http.routers.prom_sportagainstwar_com.rule=Host(`prom.sportagainstwar.com`)"
-          - "traefik.http.services.prom_sportagainstwar_com.loadbalancer.server.port=9090"
+          - "traefik.http.routers.prom_testme_cloud.rule=Host(`prom.testme.cloud`)"
+          - "traefik.http.services.prom_testme_cloud.loadbalancer.server.port=9090"
           - "traefik.docker.network=dle-network"
       restart_policy:
         condition: on-failure
@@ -113,10 +113,10 @@ services:
           - node.role==manager
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.grafana_sportagainstwar_com.rule=Host(`grafana.sportagainstwar.com`)"
-        - "traefik.http.services.grafana_sportagainstwar_com.loadbalancer.server.port=3000"
+        - "traefik.http.routers.grafana_testme_cloud.rule=Host(`grafana.testme.cloud`)"
+        - "traefik.http.services.grafana_testme_cloud.loadbalancer.server.port=3000"
         - "traefik.docker.network=dle-network"
-        #- "traefik.frontend.rule=Host:grafana.sportagainstwar.com"
+        #- "traefik.frontend.rule=Host:grafana.testme.cloud"
         #- "traefik.backend=grafana"
         #- "traefik.port=3000"
 #        - "traefik.docker.network=dle-network"
